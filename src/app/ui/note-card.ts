@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'note-card',
@@ -39,11 +39,13 @@ import { Component, Input } from '@angular/core';
             class="note-card row shadow-1"
             [ngStyle]="{ 'background-color': note.color }" 
             (mouseleave)="toggleCheck()" 
-            (mouseenter)="toggleCheck()">
+            (mouseenter)="toggleCheck()"
+        >
             <div 
                 class="icon" 
                 (click)="onChecked()"
-                *ngIf="showCheck">
+                *ngIf="showCheck"
+            >
                 <i class="material-icons">check</i>
             </div>
             <div class="col-xs-12 title">
@@ -59,6 +61,8 @@ import { Component, Input } from '@angular/core';
 export class NoteCard { 
 
     @Input() note = { };
+    @Output() checked = new EventEmitter();
+
     showCheck: boolean = false;
 
     toggleCheck() {
@@ -66,7 +70,7 @@ export class NoteCard {
     }
 
     onChecked() {
-        console.log('You have clicked on the note');
+        this.checked.next(this.note);
     }
 
 }
