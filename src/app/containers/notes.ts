@@ -31,6 +31,7 @@ import { Component } from '@angular/core';
 })
 
 export class NotesContainer {
+    // Sample notes for our application
     notes = [
         { 
             title: "Meeting",
@@ -49,10 +50,12 @@ export class NotesContainer {
         }
     ]
 
+    // deleting specific note from 'notes' array
     onNoteChecked(i: number) {
         this.notes.splice(i, 1);
     }
 
+    // adding new note in the 'notes' array using event emitted from 'note-creator' component
     onCreateNote(note) {
         this.notes.push(note);
     }
